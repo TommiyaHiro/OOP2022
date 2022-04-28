@@ -10,9 +10,9 @@ namespace SalecesCalculator {
         private List<Sale> _sales; // csvファイルから読み込んだデータ
 
         // コンストラクタ
-        public SalesCounter(List<Sale> sales)
+        public SalesCounter(string filePath)
         {
-            _sales = sales;
+            _sales = ReadSales(filePath);
         }
         //　店舗別売上を求める
         public Dictionary<string, int> GetPerStoreSales()
