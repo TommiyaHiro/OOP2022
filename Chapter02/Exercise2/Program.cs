@@ -5,7 +5,7 @@ namespace Excercise2 {
     class Program {
         //コマンドライン引数
         static void Main(string[] args) {
-            if(args.Length >= 1 && args[0] == "-tof") {
+            if(args.Length >= 1 && args[0] == "-toi") {
                 // インチからメートルへの対応表を出力
                 PrintInchToMeterList(1, 10);
             }
