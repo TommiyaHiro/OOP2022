@@ -12,6 +12,9 @@ namespace Exercise3 {
         // 商品カテゴリー
         public string ProductCategory { get; set; }
 
+        // 店舗別カテゴリ
+        public string shop { get; set; }
+
         //売上高
         public int Amount { get; set; }
 

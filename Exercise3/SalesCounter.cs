@@ -17,6 +17,18 @@ namespace Exercise3 {
         public IDictionary<string, int> GetPerStoreSales() {
             var dict = new Dictionary<string, int>();
             foreach(var sale in _sales) {
+                if(dict.ContainsKey(sale.ShopName))
+                    dict[sale.ShopName] += sale.Amount;
+                else
+                    dict[sale.ShopName] = sale.Amount;
+            }
+            return dict;
+        }
+
+        //　カテゴリー別売上を求める
+        public IDictionary<string, int> GetPerCategorySales() {
+            var dict = new Dictionary<string, int>();
+            foreach(var sale in _sales) {
                 if(dict.ContainsKey(sale.ProductCategory))
                     dict[sale.ProductCategory] += sale.Amount;
                 else
@@ -24,6 +36,7 @@ namespace Exercise3 {
             }
             return dict;
         }
+
 
         // 売上データを読み込み、Saleオブジェクトのリストを返す
         public static IEnumerable<Sale> ReadSales(string filePath) {
