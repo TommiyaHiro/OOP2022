@@ -30,10 +30,12 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_3(List<string> names) {
-            throw new NotImplementedException();
+            foreach(var n in names.Where(n => n.Contains("o"))) {
+                Console.WriteLine(n);
+            }
         }
 
-        private static void Exercise2_2(List<string> names) {
+            private static void Exercise2_2(List<string> names) {
             var removedCount = names.RemoveAll(n => n.Contains('o'));
             Console.WriteLine(removedCount);
         }
