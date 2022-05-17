@@ -12,16 +12,16 @@ namespace Exercise02 {
             };
 
             Exercise2_1(names);
-            Console.WriteLine();
+            Console.WriteLine("----");
 
             Exercise2_2(names);
-            Console.WriteLine();
+            Console.WriteLine("----");
 
             Exercise2_3(names);
-            Console.WriteLine();
+            Console.WriteLine("----");
 
             Exercise2_4(names);
-            Console.WriteLine();
+            Console.WriteLine("----");
 
         }
 
@@ -34,7 +34,8 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_2(List<string> names) {
-            throw new NotImplementedException();
+            var removedCount = names.RemoveAll(n => n.Contains('o'));
+            Console.WriteLine(removedCount);
         }
 
         private static void Exercise2_1(List<string> names) {
