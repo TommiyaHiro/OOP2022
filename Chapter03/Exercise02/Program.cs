@@ -21,17 +21,22 @@ namespace Exercise02 {
             Console.WriteLine("----");
 
             Exercise2_4(names);
-            Console.WriteLine("----");
 
         }
 
         private static void Exercise2_4(List<string> names) {
-            throw new NotImplementedException();
+            var select = names.Where(n => n.StartsWith("B")).Select(n => new { n.Length, n });
+
+            foreach(var name in select) {
+                Console.WriteLine(name.Length + name.n);
+            }
         }
 
         private static void Exercise2_3(List<string> names) {
-            foreach(var n in names.Where(n => n.Contains("o"))) {
-                Console.WriteLine(n);
+            var select = names.Where(n => n.Contains('o')).ToArray(); // 配列として抽出
+            foreach(var name in select) {
+                Console.WriteLine(name);
+
             }
         }
 
