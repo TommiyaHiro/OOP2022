@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Exercise01 {
-    class YearMonth {
+    public class YearMonth {
         // ４－１－１
         public int Year { get; private set; }
 
