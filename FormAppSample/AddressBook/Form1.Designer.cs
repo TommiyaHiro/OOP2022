@@ -43,7 +43,7 @@ namespace AddressBook {
             this.pbPicture = new System.Windows.Forms.PictureBox();
             this.bpPictureClear = new System.Windows.Forms.Button();
             this.btPictureOpen = new System.Windows.Forms.Button();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.ofdFileOpenDialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersons)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPicture)).BeginInit();
             this.SuspendLayout();
@@ -197,36 +197,40 @@ namespace AddressBook {
             this.btAddPerson.TabIndex = 16;
             this.btAddPerson.Text = "追加";
             this.btAddPerson.UseVisualStyleBackColor = true;
+            this.btAddPerson.Click += new System.EventHandler(this.btAddPerson_Click);
             // 
             // pbPicture
             // 
             this.pbPicture.Location = new System.Drawing.Point(505, 12);
             this.pbPicture.Name = "pbPicture";
             this.pbPicture.Size = new System.Drawing.Size(156, 160);
+            this.pbPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbPicture.TabIndex = 17;
             this.pbPicture.TabStop = false;
             // 
             // bpPictureClear
             // 
-            this.bpPictureClear.Location = new System.Drawing.Point(505, 187);
+            this.bpPictureClear.Location = new System.Drawing.Point(586, 187);
             this.bpPictureClear.Name = "bpPictureClear";
             this.bpPictureClear.Size = new System.Drawing.Size(75, 21);
             this.bpPictureClear.TabIndex = 18;
             this.bpPictureClear.Text = "クリア";
             this.bpPictureClear.UseVisualStyleBackColor = true;
+            this.bpPictureClear.Click += new System.EventHandler(this.bpPictureClear_Click);
             // 
             // btPictureOpen
             // 
-            this.btPictureOpen.Location = new System.Drawing.Point(586, 187);
+            this.btPictureOpen.Location = new System.Drawing.Point(505, 187);
             this.btPictureOpen.Name = "btPictureOpen";
             this.btPictureOpen.Size = new System.Drawing.Size(75, 21);
             this.btPictureOpen.TabIndex = 19;
             this.btPictureOpen.Text = "開く...";
             this.btPictureOpen.UseVisualStyleBackColor = true;
+            this.btPictureOpen.Click += new System.EventHandler(this.btPictureOpen_Click);
             // 
-            // openFileDialog1
+            // ofdFileOpenDialog
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.ofdFileOpenDialog.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -253,7 +257,7 @@ namespace AddressBook {
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "住所録アプリ";
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersons)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPicture)).EndInit();
             this.ResumeLayout(false);
@@ -282,7 +286,7 @@ namespace AddressBook {
         private System.Windows.Forms.PictureBox pbPicture;
         private System.Windows.Forms.Button bpPictureClear;
         private System.Windows.Forms.Button btPictureOpen;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.OpenFileDialog ofdFileOpenDialog;
     }
 }
 
