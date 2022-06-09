@@ -47,6 +47,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FormAppSample", "FormAppSam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample0607", "FormAppSample\Sample0607\Sample0607.csproj", "{87B85D45-0D0F-44C8-AAC0-19D7F2220B91}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Number Game", "FormAppSample\Number Game\Number Game.csproj", "{19BE4064-E824-4A32-8064-337A353D3B81}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +119,10 @@ Global
 		{87B85D45-0D0F-44C8-AAC0-19D7F2220B91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87B85D45-0D0F-44C8-AAC0-19D7F2220B91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87B85D45-0D0F-44C8-AAC0-19D7F2220B91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19BE4064-E824-4A32-8064-337A353D3B81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19BE4064-E824-4A32-8064-337A353D3B81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19BE4064-E824-4A32-8064-337A353D3B81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19BE4064-E824-4A32-8064-337A353D3B81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -138,6 +144,7 @@ Global
 		{DA394087-47F7-47FC-B327-1005200DA312} = {195E34D2-10AA-422D-BC9A-09B824DE5322}
 		{62C02265-8514-46F3-B2DF-A134F3400AAB} = {54143BD0-EE35-43E2-80AE-17FDE2E03C5D}
 		{87B85D45-0D0F-44C8-AAC0-19D7F2220B91} = {45578DD9-E0EC-4FD2-B9EA-7565EDBFED96}
+		{19BE4064-E824-4A32-8064-337A353D3B81} = {45578DD9-E0EC-4FD2-B9EA-7565EDBFED96}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B492161C-E013-4C30-A0D1-159879055BEA}
