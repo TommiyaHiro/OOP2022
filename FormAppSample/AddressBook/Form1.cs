@@ -107,7 +107,12 @@ namespace AddressBook {
             listPerson[index].Company = tbCampany.Text;
             listPerson[index].Picture = pbPicture.Image;
             listPerson[index].listGroup = GetCheckBoxGroup();
+            dgvPersons.Refresh();// データグリッドビューの更新
 
+        }
+
+        private void btDelete_Click(object sender, EventArgs e) {
+            listPerson.RemoveAt(dgvPersons.CurrentRow.Index);
         }
     }
 }
