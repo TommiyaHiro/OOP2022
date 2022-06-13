@@ -61,6 +61,8 @@ namespace AddressBook {
 
         // データグリッドビューをクリックしたときのイベントハンドラ
         private void dgvPersons_Click(object sender, EventArgs e) {
+            if(dgvPersons.CurrentRow == null) return;
+
             int index = dgvPersons.CurrentRow.Index;
 
             tbName.Text = listPerson[index].Name;
@@ -68,6 +70,8 @@ namespace AddressBook {
             tbAddress.Text = listPerson[index].Address;
             tbCampany.Text = listPerson[index].Company;
             pbPicture.Image = listPerson[index].Picture;
+
+            CheckBoxAllClear();
 
             foreach(var group in listPerson[index].listGroup) {
                 switch(group) {
@@ -87,6 +91,23 @@ namespace AddressBook {
                         break;
                 }
             }
+        }
+
+        // チェックボックスのクリア
+        private void CheckBoxAllClear() {
+            cbFamily.Checked = cbFriend.Checked = cbWork.Checked = cbOther.Checked = false;
+        }
+
+        // 更新ボタンが押された時の処理
+        private void btUpdate_Click(object sender, EventArgs e) {
+            int index = dgvPersons.CurrentRow.Index;
+            listPerson[index].Name = tbName.Text;
+            listPerson[index].MailAddress = tbMailAddress.Text;
+            listPerson[index].Address = tbAddress.Text;
+            listPerson[index].Company = tbCampany.Text;
+            listPerson[index].Picture = pbPicture.Image;
+            listPerson[index].listGroup = GetCheckBoxGroup();
+
         }
     }
 }
