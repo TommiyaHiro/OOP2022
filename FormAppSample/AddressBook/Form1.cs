@@ -35,6 +35,12 @@ namespace AddressBook {
                 listGroup = GetCheckBoxGroup(),
             };
             listPerson.Add(newPerson);
+            dgvPersons.Rows[dgvPersons.RowCount - 1].Selected = true;
+
+            if(listPerson.Count() > 0) {
+                btDelete.Enabled = true;
+                btUpdate.Enabled = true;
+            }
         }
 
         // チェックボックスにセットされている値をリストとしてとりだす
@@ -111,8 +117,17 @@ namespace AddressBook {
 
         }
 
+        // 削除ボタン
         private void btDelete_Click(object sender, EventArgs e) {
             listPerson.RemoveAt(dgvPersons.CurrentRow.Index);
+
+            if(listPerson.Count() == 0) {
+                btDelete.Enabled = false;
+                btUpdate.Enabled = false;
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e) {
         }
     }
 }
