@@ -26,6 +26,11 @@ namespace AddressBook {
         }
 
         private void btAddPerson_Click(object sender, EventArgs e) {
+            // 氏名が未入力だったら登録しない
+            if(String.IsNullOrWhiteSpace(tbName.Text)) {
+                MessageBox.Show("入力されていません");
+                return;
+            }
             Person newPerson = new Person {
                 Name = tbName.Text,
                 MailAddress = tbMailAddress.Text,
@@ -41,6 +46,13 @@ namespace AddressBook {
                 btDelete.Enabled = true;
                 btUpdate.Enabled = true;
             }
+            // コンボボックスに会社名を登録する
+            var cbcom = cbCompany.Items.IndexOf(cbCompany.Text);
+
+            if(cbcom == -1) {
+                cbCompany.Items.Add(cbCompany.Text);
+            }
+
         }
 
         // チェックボックスにセットされている値をリストとしてとりだす
