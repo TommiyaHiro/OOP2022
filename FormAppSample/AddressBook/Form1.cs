@@ -35,7 +35,7 @@ namespace AddressBook {
                 Name = tbName.Text,
                 MailAddress = tbMailAddress.Text,
                 Address = tbAddress.Text,
-                Company = tbCampany.Text,
+                Company = cbCompany.Text,
                 Picture = pbPicture.Image,
                 listGroup = GetCheckBoxGroup(),
             };
@@ -52,6 +52,11 @@ namespace AddressBook {
             if(cbcom == -1) {
                 cbCompany.Items.Add(cbCompany.Text);
             }
+
+            //別解
+            //if(!cbCompany.Items.Contains(cbCompany.Text)) {
+            //    cbCompany.Items.Add(cbCompany.Text);
+            //}
 
         }
 
@@ -86,7 +91,7 @@ namespace AddressBook {
             tbName.Text = listPerson[index].Name;
             tbMailAddress.Text = listPerson[index].MailAddress;
             tbAddress.Text = listPerson[index].Address;
-            tbCampany.Text = listPerson[index].Company;
+            cbCompany.Text = listPerson[index].Company;
             pbPicture.Image = listPerson[index].Picture;
 
             CheckBoxAllClear();
@@ -122,7 +127,7 @@ namespace AddressBook {
             listPerson[index].Name = tbName.Text;
             listPerson[index].MailAddress = tbMailAddress.Text;
             listPerson[index].Address = tbAddress.Text;
-            listPerson[index].Company = tbCampany.Text;
+            listPerson[index].Company = cbCompany.Text;
             listPerson[index].Picture = pbPicture.Image;
             listPerson[index].listGroup = GetCheckBoxGroup();
             dgvPersons.Refresh();// データグリッドビューの更新
@@ -141,5 +146,6 @@ namespace AddressBook {
 
         private void Form1_Load(object sender, EventArgs e) {
         }
+
     }
 }
