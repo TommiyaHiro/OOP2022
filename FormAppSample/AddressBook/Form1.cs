@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -38,21 +40,18 @@ namespace AddressBook {
                 Company = cbCompany.Text,
                 Picture = pbPicture.Image,
                 listGroup = GetCheckBoxGroup(),
+                Registration = dateTimePicker1.Value,
+
             };
             listPerson.Add(newPerson);
             dgvPersons.Rows[dgvPersons.RowCount - 1].Selected = true;
 
-            if(listPerson.Count() > 0) {
-                btDelete.Enabled = true;
-                btUpdate.Enabled = true;
-            }
-            // コンボボックスに会社名を登録する
-            var cbcom = cbCompany.Items.IndexOf(cbCompany.Text);
-
-            if(cbcom == -1) {
-                cbCompany.Items.Add(cbCompany.Text);
-            }
-
+            //if(listPerson.Count() > 0) {
+            //    btDelete.Enabled = true;
+            //    btUpdate.Enabled = true;
+            //}
+            setCbCompany(cbCompany.Text);
+            // ↑↑↑
             //別解
             //if(!cbCompany.Items.Contains(cbCompany.Text)) {
             //    cbCompany.Items.Add(cbCompany.Text);
@@ -60,19 +59,28 @@ namespace AddressBook {
 
         }
 
+        // コンボボックスに会社名を登録する
+        private void setCbCompany(string company) {
+            var cbcom = cbCompany.Items.IndexOf(cbCompany.Text);
+
+            if(cbcom == -1) {
+                cbCompany.Items.Add(cbCompany.Text);
+            }
+        }
+
         // チェックボックスにセットされている値をリストとしてとりだす
         private List<Person.GroupType> GetCheckBoxGroup() {
             var listGroup = new List<Person.GroupType>();
-            if(cbFamily.Checked){
+            if(cbFamily.Checked) {
                 listGroup.Add(Person.GroupType.家族);
             }
-            if(cbFriend.Checked){
+            if(cbFriend.Checked) {
                 listGroup.Add(Person.GroupType.友人);
             }
-            if(cbWork.Checked){
+            if(cbWork.Checked) {
                 listGroup.Add(Person.GroupType.仕事);
             }
-            if(cbOther.Checked){
+            if(cbOther.Checked) {
                 listGroup.Add(Person.GroupType.その他);
             }
             return listGroup;
@@ -93,7 +101,7 @@ namespace AddressBook {
             tbAddress.Text = listPerson[index].Address;
             cbCompany.Text = listPerson[index].Company;
             pbPicture.Image = listPerson[index].Picture;
-
+            dateTimePicker1.Value = listPerson[index].Registration.Year > 1900? listPerson[index].Registration : DateTime.Today;
             CheckBoxAllClear();
 
             foreach(var group in listPerson[index].listGroup) {
@@ -139,13 +147,59 @@ namespace AddressBook {
             listPerson.RemoveAt(dgvPersons.CurrentRow.Index);
 
             if(listPerson.Count() == 0) {
-                btDelete.Enabled = false;
-                btUpdate.Enabled = false;
+                Enabled();// マスク処理呼び出し
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e) {
+        private void Enabled() {
+            btUpdate.Enabled = btDelete.Enabled = listPerson.Count() > 0 ? true : false;
         }
 
+            private void Form1_Load(object sender, EventArgs e) {
+                Enabled();
+            }
+
+            // 保存ボタンのイベントハンドラ
+            private void btSave_Click(object sender, EventArgs e) {
+                if(sfdSaveDialog.ShowDialog() == DialogResult.OK) {
+                    try {
+                        // バイナリ形式でシリアル化
+                        var bf = new BinaryFormatter();
+
+                        using(FileStream fs = File.Open(sfdSaveDialog.FileName, FileMode.Create)) {
+                            bf.Serialize(fs, listPerson);
+                        }
+                    }
+                    catch(Exception ex) {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+
+            }
+        
+        private void btOpen_Click(object sender, EventArgs e) {
+            if(ofdFileOpenDialog.ShowDialog() == DialogResult.OK) {
+                try {
+                    // バイナリ形式でシリアル化
+                    var bf = new BinaryFormatter();
+                    using(FileStream fs = File.Open(ofdFileOpenDialog.FileName, FileMode.Open, FileAccess.Read)){
+                        // シリアル化して読み込む
+                        listPerson = (BindingList<Person>)bf.Deserialize(fs);
+                        dgvPersons.DataSource = null;
+                        dgvPersons.DataSource = listPerson;
+                    }
+                }
+                catch(Exception ex) {
+                    MessageBox.Show(ex.Message);
+                }
+                
+                foreach(var item in listPerson.Select(p => p.Company)) {
+                    setCbCompany(item); // 存在する会社を登録
+                }
+            }
+            Enabled();
+        }
     }
 }
+
+

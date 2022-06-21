@@ -47,6 +47,12 @@ namespace AddressBook {
             this.btUpdate = new System.Windows.Forms.Button();
             this.btDelete = new System.Windows.Forms.Button();
             this.cbCompany = new System.Windows.Forms.ComboBox();
+            this.btSave = new System.Windows.Forms.Button();
+            this.btOpen = new System.Windows.Forms.Button();
+            this.sfdSaveDialog = new System.Windows.Forms.SaveFileDialog();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersons)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPicture)).BeginInit();
             this.SuspendLayout();
@@ -105,13 +111,13 @@ namespace AddressBook {
             // 
             this.dgvPersons.AllowUserToAddRows = false;
             this.dgvPersons.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPersons.Location = new System.Drawing.Point(48, 293);
+            this.dgvPersons.Location = new System.Drawing.Point(201, 287);
             this.dgvPersons.MultiSelect = false;
             this.dgvPersons.Name = "dgvPersons";
             this.dgvPersons.ReadOnly = true;
             this.dgvPersons.RowTemplate.Height = 21;
             this.dgvPersons.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPersons.Size = new System.Drawing.Size(622, 150);
+            this.dgvPersons.Size = new System.Drawing.Size(491, 135);
             this.dgvPersons.TabIndex = 5;
             this.dgvPersons.Click += new System.EventHandler(this.dgvPersons_Click);
             // 
@@ -199,7 +205,7 @@ namespace AddressBook {
             // 
             // btAddPerson
             // 
-            this.btAddPerson.Location = new System.Drawing.Point(505, 214);
+            this.btAddPerson.Location = new System.Drawing.Point(536, 214);
             this.btAddPerson.Name = "btAddPerson";
             this.btAddPerson.Size = new System.Drawing.Size(156, 40);
             this.btAddPerson.TabIndex = 16;
@@ -210,7 +216,7 @@ namespace AddressBook {
             // pbPicture
             // 
             this.pbPicture.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pbPicture.Location = new System.Drawing.Point(505, 12);
+            this.pbPicture.Location = new System.Drawing.Point(536, 12);
             this.pbPicture.Name = "pbPicture";
             this.pbPicture.Size = new System.Drawing.Size(156, 160);
             this.pbPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -219,7 +225,7 @@ namespace AddressBook {
             // 
             // bpPictureClear
             // 
-            this.bpPictureClear.Location = new System.Drawing.Point(586, 187);
+            this.bpPictureClear.Location = new System.Drawing.Point(617, 187);
             this.bpPictureClear.Name = "bpPictureClear";
             this.bpPictureClear.Size = new System.Drawing.Size(75, 21);
             this.bpPictureClear.TabIndex = 18;
@@ -229,7 +235,7 @@ namespace AddressBook {
             // 
             // btPictureOpen
             // 
-            this.btPictureOpen.Location = new System.Drawing.Point(505, 187);
+            this.btPictureOpen.Location = new System.Drawing.Point(536, 187);
             this.btPictureOpen.Name = "btPictureOpen";
             this.btPictureOpen.Size = new System.Drawing.Size(75, 21);
             this.btPictureOpen.TabIndex = 19;
@@ -244,7 +250,7 @@ namespace AddressBook {
             // btUpdate
             // 
             this.btUpdate.Enabled = false;
-            this.btUpdate.Location = new System.Drawing.Point(505, 260);
+            this.btUpdate.Location = new System.Drawing.Point(536, 260);
             this.btUpdate.Name = "btUpdate";
             this.btUpdate.Size = new System.Drawing.Size(75, 21);
             this.btUpdate.TabIndex = 20;
@@ -255,7 +261,7 @@ namespace AddressBook {
             // btDelete
             // 
             this.btDelete.Enabled = false;
-            this.btDelete.Location = new System.Drawing.Point(587, 260);
+            this.btDelete.Location = new System.Drawing.Point(618, 260);
             this.btDelete.Name = "btDelete";
             this.btDelete.Size = new System.Drawing.Size(74, 21);
             this.btDelete.TabIndex = 21;
@@ -272,11 +278,59 @@ namespace AddressBook {
             this.cbCompany.Size = new System.Drawing.Size(282, 32);
             this.cbCompany.TabIndex = 22;
             // 
+            // btSave
+            // 
+            this.btSave.Location = new System.Drawing.Point(12, 396);
+            this.btSave.Name = "btSave";
+            this.btSave.Size = new System.Drawing.Size(127, 26);
+            this.btSave.TabIndex = 23;
+            this.btSave.Text = "保存...";
+            this.btSave.UseVisualStyleBackColor = true;
+            this.btSave.Click += new System.EventHandler(this.btSave_Click);
+            // 
+            // btOpen
+            // 
+            this.btOpen.Location = new System.Drawing.Point(12, 362);
+            this.btOpen.Name = "btOpen";
+            this.btOpen.Size = new System.Drawing.Size(127, 26);
+            this.btOpen.TabIndex = 24;
+            this.btOpen.Text = "開く...";
+            this.btOpen.UseVisualStyleBackColor = true;
+            this.btOpen.Click += new System.EventHandler(this.btOpen_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(0, 0);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 19);
+            this.textBox1.TabIndex = 25;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(492, 432);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 19);
+            this.dateTimePicker1.TabIndex = 26;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(442, 437);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(41, 12);
+            this.label6.TabIndex = 27;
+            this.label6.Text = "登録日";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(725, 459);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.btOpen);
+            this.Controls.Add(this.btSave);
             this.Controls.Add(this.cbCompany);
             this.Controls.Add(this.btDelete);
             this.Controls.Add(this.btUpdate);
@@ -334,6 +388,12 @@ namespace AddressBook {
         private System.Windows.Forms.Button btUpdate;
         private System.Windows.Forms.Button btDelete;
         private System.Windows.Forms.ComboBox cbCompany;
+        private System.Windows.Forms.Button btSave;
+        private System.Windows.Forms.Button btOpen;
+        private System.Windows.Forms.SaveFileDialog sfdSaveDialog;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label label6;
     }
 }
 
