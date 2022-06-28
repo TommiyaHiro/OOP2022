@@ -41,6 +41,8 @@ namespace AddressBook {
                 Picture = pbPicture.Image,
                 listGroup = GetCheckBoxGroup(),
                 Registration = dateTimePicker1.Value,
+                TelNumber = tbTelNumber.Text,
+                //KindNumber = 
 
             };
             listPerson.Add(newPerson);
@@ -85,6 +87,19 @@ namespace AddressBook {
             }
             return listGroup;
         }
+
+        //private List<Person.KindNumberType> GetRadioButton() {
+        //    var NumGroup = new List<Person.KindNumberType>();
+        //    if(radioButton1.) {
+        //        NumGroup.Add(Person.KindNumberType.自宅);
+        //    }
+        //    if(radioButton2.Checked) {
+        //        NumGroup.Add(Person.KindNumberType.携帯);
+        //    }
+
+        //    return NumGroup;
+        //}
+
 
         private void bpPictureClear_Click(object sender, EventArgs e) {
             pbPicture.Image = null;
@@ -157,6 +172,7 @@ namespace AddressBook {
 
             private void Form1_Load(object sender, EventArgs e) {
                 Enabled();
+            
             }
 
             // 保存ボタンのイベントハンドラ
@@ -199,6 +215,7 @@ namespace AddressBook {
             }
             Enabled();
         }
+
     }
 }
 

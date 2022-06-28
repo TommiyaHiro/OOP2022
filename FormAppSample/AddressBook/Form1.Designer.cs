@@ -53,8 +53,14 @@ namespace AddressBook {
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tbTelNumber = new System.Windows.Forms.TextBox();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersons)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPicture)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -111,13 +117,13 @@ namespace AddressBook {
             // 
             this.dgvPersons.AllowUserToAddRows = false;
             this.dgvPersons.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPersons.Location = new System.Drawing.Point(201, 287);
+            this.dgvPersons.Location = new System.Drawing.Point(201, 376);
             this.dgvPersons.MultiSelect = false;
             this.dgvPersons.Name = "dgvPersons";
             this.dgvPersons.ReadOnly = true;
             this.dgvPersons.RowTemplate.Height = 21;
             this.dgvPersons.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPersons.Size = new System.Drawing.Size(491, 135);
+            this.dgvPersons.Size = new System.Drawing.Size(491, 136);
             this.dgvPersons.TabIndex = 5;
             this.dgvPersons.Click += new System.EventHandler(this.dgvPersons_Click);
             // 
@@ -205,7 +211,7 @@ namespace AddressBook {
             // 
             // btAddPerson
             // 
-            this.btAddPerson.Location = new System.Drawing.Point(536, 214);
+            this.btAddPerson.Location = new System.Drawing.Point(535, 253);
             this.btAddPerson.Name = "btAddPerson";
             this.btAddPerson.Size = new System.Drawing.Size(156, 40);
             this.btAddPerson.TabIndex = 16;
@@ -216,7 +222,7 @@ namespace AddressBook {
             // pbPicture
             // 
             this.pbPicture.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pbPicture.Location = new System.Drawing.Point(536, 12);
+            this.pbPicture.Location = new System.Drawing.Point(536, 33);
             this.pbPicture.Name = "pbPicture";
             this.pbPicture.Size = new System.Drawing.Size(156, 160);
             this.pbPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -225,7 +231,7 @@ namespace AddressBook {
             // 
             // bpPictureClear
             // 
-            this.bpPictureClear.Location = new System.Drawing.Point(617, 187);
+            this.bpPictureClear.Location = new System.Drawing.Point(617, 208);
             this.bpPictureClear.Name = "bpPictureClear";
             this.bpPictureClear.Size = new System.Drawing.Size(75, 21);
             this.bpPictureClear.TabIndex = 18;
@@ -235,7 +241,7 @@ namespace AddressBook {
             // 
             // btPictureOpen
             // 
-            this.btPictureOpen.Location = new System.Drawing.Point(536, 187);
+            this.btPictureOpen.Location = new System.Drawing.Point(535, 208);
             this.btPictureOpen.Name = "btPictureOpen";
             this.btPictureOpen.Size = new System.Drawing.Size(75, 21);
             this.btPictureOpen.TabIndex = 19;
@@ -250,7 +256,7 @@ namespace AddressBook {
             // btUpdate
             // 
             this.btUpdate.Enabled = false;
-            this.btUpdate.Location = new System.Drawing.Point(536, 260);
+            this.btUpdate.Location = new System.Drawing.Point(536, 315);
             this.btUpdate.Name = "btUpdate";
             this.btUpdate.Size = new System.Drawing.Size(75, 21);
             this.btUpdate.TabIndex = 20;
@@ -261,7 +267,7 @@ namespace AddressBook {
             // btDelete
             // 
             this.btDelete.Enabled = false;
-            this.btDelete.Location = new System.Drawing.Point(618, 260);
+            this.btDelete.Location = new System.Drawing.Point(617, 315);
             this.btDelete.Name = "btDelete";
             this.btDelete.Size = new System.Drawing.Size(74, 21);
             this.btDelete.TabIndex = 21;
@@ -280,7 +286,7 @@ namespace AddressBook {
             // 
             // btSave
             // 
-            this.btSave.Location = new System.Drawing.Point(12, 396);
+            this.btSave.Location = new System.Drawing.Point(48, 486);
             this.btSave.Name = "btSave";
             this.btSave.Size = new System.Drawing.Size(127, 26);
             this.btSave.TabIndex = 23;
@@ -290,7 +296,7 @@ namespace AddressBook {
             // 
             // btOpen
             // 
-            this.btOpen.Location = new System.Drawing.Point(12, 362);
+            this.btOpen.Location = new System.Drawing.Point(48, 436);
             this.btOpen.Name = "btOpen";
             this.btOpen.Size = new System.Drawing.Size(127, 26);
             this.btOpen.TabIndex = 24;
@@ -307,7 +313,7 @@ namespace AddressBook {
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(492, 432);
+            this.dateTimePicker1.Location = new System.Drawing.Point(492, 518);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 19);
             this.dateTimePicker1.TabIndex = 26;
@@ -315,17 +321,69 @@ namespace AddressBook {
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(442, 437);
+            this.label6.Location = new System.Drawing.Point(442, 523);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(41, 12);
             this.label6.TabIndex = 27;
             this.label6.Text = "登録日";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label7.Location = new System.Drawing.Point(44, 293);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(106, 24);
+            this.label7.TabIndex = 28;
+            this.label7.Text = "電話番号";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.tbTelNumber);
+            this.groupBox1.Controls.Add(this.radioButton2);
+            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Location = new System.Drawing.Point(201, 275);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(282, 83);
+            this.groupBox1.TabIndex = 29;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "種別";
+            // 
+            // tbTelNumber
+            // 
+            this.tbTelNumber.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.tbTelNumber.Location = new System.Drawing.Point(7, 40);
+            this.tbTelNumber.Name = "tbTelNumber";
+            this.tbTelNumber.Size = new System.Drawing.Size(200, 28);
+            this.tbTelNumber.TabIndex = 2;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(60, 18);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(47, 16);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.Text = "携帯";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(7, 18);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(47, 16);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.Text = "自宅";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(725, 459);
+            this.ClientSize = new System.Drawing.Size(725, 549);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.textBox1);
@@ -358,6 +416,8 @@ namespace AddressBook {
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersons)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPicture)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -394,6 +454,11 @@ namespace AddressBook {
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox tbTelNumber;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
     }
 }
 
