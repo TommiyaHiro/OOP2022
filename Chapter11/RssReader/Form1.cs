@@ -56,6 +56,8 @@ namespace RssReader {
 
         private void lbRssTitle_Click(object sender, EventArgs e) {
             int index = lbRssTitle.SelectedIndex; // 選択した箇所のインデックスを取得
+            if(index == -1) return;
+
             var url = xLink.ElementAt(index);
             wvBrowser.Navigate(url);
         }
