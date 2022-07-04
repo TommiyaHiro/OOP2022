@@ -22,7 +22,7 @@ namespace Exercise1 {
         }
 
         private static void Exercise1_1(string file) {
-            var xdoc = XDocument.Load("Sample.xml");
+            var xdoc = XDocument.Load(file);
             var sports = xdoc.Root.Elements().Select(x => new {
                 SportsName = (string)x.Element("name"),
                 TeamMember = (int)x.Element("teammembers")
@@ -35,6 +35,15 @@ namespace Exercise1 {
         }
 
         private static void Exercise1_2(string file) {
+            var xdoc = XDocument.Load(file);
+            var sports = xdoc.Root.Elements().Select(x => new {
+                                 FirstPlay = x.Element("firstplayed").Value,
+                                 KanjiName = x.Element("name").Attribute("kanji").Value})
+                .OrderBy(x => int.Parse(x.FirstPlay));
+            foreach(var sport in sports) {
+                Console.WriteLine("{0}　{1}", sport.KanjiName,sport.FirstPlay);
+            }
+
         }
 
         private static void Exercise1_3(string file) {
