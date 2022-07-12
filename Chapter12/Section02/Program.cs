@@ -8,22 +8,23 @@ using System.Xml;
 using System.Xml.Serialization;
 
 namespace Section02 {
-
     [XmlRoot("novels")]
     public class NovelCollection {
-        [XmlElement(Type = typeof(Novel),ElementName ="novel")]
+        [XmlElement(Type = typeof(Novel), ElementName = "novel")]
         public Novel[] Novels { get; set; }
     }
 
+
     class Program {
         static void Main(string[] args) {
-            //SerializeToFile();
-            Deserialize();
+            SerializeToFile();
+            //Deserialize();
         }
 
         //List 12-6
         public static void SerializeToFile() {
-            //var novel = new Novel {
+            //var novel = new Novel
+            //{
             //    Author = "ジェイムズ・P・ホーガン",
             //    Title = "星を継ぐもの",
             //    Published = 1977,
@@ -63,9 +64,9 @@ namespace Section02 {
                 var serializer = new XmlSerializer(typeof(NovelCollection));
                 var novels = serializer.Deserialize(reader) as NovelCollection;
                 // 以下、内容を確認するコード
+                //Console.WriteLine(novel);
                 foreach(var novel in novels.Novels) {
                     Console.WriteLine(novel);
-
                 }
             }
         }

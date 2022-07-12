@@ -11,7 +11,7 @@ namespace Section02 {
     public class Novel {
         [XmlElement(ElementName = "title")]
         public string Title { get; set; }
-        [XmlElement(ElementName ="author")]
+        [XmlElement(ElementName = "author")]
         public string Author { get; set; }
         [XmlElement(ElementName = "published")]
         public int Published { get; set; }

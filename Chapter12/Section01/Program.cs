@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
 using System.Xml;
 
 namespace Section01 {
@@ -17,7 +17,8 @@ namespace Section01 {
         //List 12-2
         //シリアル化
         public static void Serialize() {
-            //var novel = new Novel {
+            //var novel = new Novel
+            //{
             //    Author = "ジェイムズ・P・ホーガン",
             //    Title = "星を継ぐもの",
             //    Published = 1977,
@@ -42,7 +43,7 @@ namespace Section01 {
                 IndentChars = "  ",
             };
             using(var writer = XmlWriter.Create("novels.xml", settings)) {
-                var serializer = new DataContractSerializer(novels.GetType());
+                var serializer = new DataContractSerializer(novels.GetType());   //P185
                 serializer.WriteObject(writer, novels);
             }
 
@@ -69,7 +70,5 @@ namespace Section01 {
                 Console.WriteLine(line);
 
         }
-
-
     }
 }
