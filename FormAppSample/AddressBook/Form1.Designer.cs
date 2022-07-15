@@ -138,7 +138,7 @@ namespace AddressBook {
             // tbCampany
             // 
             this.tbCampany.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tbCampany.Location = new System.Drawing.Point(12, 171);
+            this.tbCampany.Location = new System.Drawing.Point(12, 0);
             this.tbCampany.Name = "tbCampany";
             this.tbCampany.Size = new System.Drawing.Size(39, 31);
             this.tbCampany.TabIndex = 8;
@@ -306,7 +306,7 @@ namespace AddressBook {
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(0, 0);
+            this.textBox1.Location = new System.Drawing.Point(0, 2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 19);
             this.textBox1.TabIndex = 25;

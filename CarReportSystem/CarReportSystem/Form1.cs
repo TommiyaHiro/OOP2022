@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CarReportSystem {
     public partial class Form1 : Form {
+
         BindingList<CarReport> listPerson = new BindingList<CarReport>();
 
         public Form1() {
@@ -17,6 +20,11 @@ namespace CarReportSystem {
             dgvArticle.DataSource = listPerson;
         }
 
+        private void btPictureOpen_Click(object sender, EventArgs e) {
+            if(openFileDialog1.ShowDialog() == DialogResult.OK) {
+                pbPicture.Image = Image.FromFile(openFileDialog1.FileName);
+            }
+        }
 
         private void btExit_Click(object sender, EventArgs e) {
             //アプリケーションの終了
@@ -31,23 +39,59 @@ namespace CarReportSystem {
             CarReport newPerson = new CarReport {
                 Date = dtpDate.Value,
                 Auther = cbName.Text,
-                //Maker = .Text,
                 CarName = cbCarName.Text,
                 Report = tbReport.Text,
                 Picture = pbPicture.Image,
-
+                Maker = GetCheckBoxGroup(),
             };
             listPerson.Add(newPerson);
             dgvArticle.Rows[dgvArticle.RowCount - 1].Selected = true;
 
+            setCbAuther(cbName.Text);
+
+            setCbCarName(cbCarName.Text);
+        
         }
 
-        private void btPictureOpen_Click(object sender, EventArgs e) {
-            if(openFileDialog1.ShowDialog() == DialogResult.OK) {
-                pbPicture.Image = Image.FromFile(openFileDialog1.FileName);
+        private void setCbCarName(string text) {
+            var cbcom = cbCarName.Items.IndexOf(cbCarName.Text);
+
+            if(cbcom == -1) {
+                cbCarName.Items.Add(cbCarName.Text);
             }
-
         }
+
+        private void setCbAuther(string text) {
+            var cbcomm = cbName.Items.IndexOf(cbName.Text);
+
+            if(cbcomm == -1) {
+                cbName.Items.Add(cbName.Text);
+            }
+        }
+
+        // チェックボックスにセットされている値をリストとしてとりだす
+        private CarReport.MakerGroup GetCheckBoxGroup() {
+            if(rbTOYOTA.Checked) {
+                return CarReport.MakerGroup.トヨタ;
+            }
+            if(rbNISSAN.Checked) {
+                return CarReport.MakerGroup.日産;
+            }
+            if(rbHONDA.Checked) {
+                return CarReport.MakerGroup.ホンダ;
+            }
+            if(rbSUBARU.Checked) {
+                return CarReport.MakerGroup.スバル;
+            }
+            if(rbForeignCar.Checked) {
+                return CarReport.MakerGroup.外国車;
+            }
+            else {
+                return CarReport.MakerGroup.その他;
+            }
+            
+        }
+
 
         private void btDelete_Click(object sender, EventArgs e) {
             listPerson.RemoveAt(dgvArticle.CurrentRow.Index);
@@ -60,6 +104,56 @@ namespace CarReportSystem {
 
         private void Enabled() {
             btFix.Enabled = btDelete.Enabled = listPerson.Count() > 0 ? true : false;
+        }
+
+        private void btPictureDelete_Click(object sender, EventArgs e) {
+            pbPicture.Image = null;
+        }
+
+
+        private void btSave_Click(object sender, EventArgs e) {
+            if(sfdSaveDialog.ShowDialog() == DialogResult.OK) {
+                try {
+                    // バイナリ形式でシリアル化
+                    var bf = new BinaryFormatter();
+
+                    using(FileStream fs = File.Open(sfdSaveDialog.FileName, FileMode.Create)) {
+                        bf.Serialize(fs, listPerson);
+                    }
+                }
+                catch(Exception ex) {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void btArticleOpen_Click(object sender, EventArgs e) {
+            if(openFileDialog1.ShowDialog() == DialogResult.OK) {
+                try {
+                    // バイナリ形式でシリアル化
+                    var bf = new BinaryFormatter();
+                    using(FileStream fs = File.Open(openFileDialog1.FileName, FileMode.Open, FileAccess.Read)) {
+                        // シリアル化して読み込む
+                        listPerson = (BindingList<CarReport>)bf.Deserialize(fs);
+                        dgvArticle.DataSource = null;
+                        dgvArticle.DataSource = listPerson;
+                    }
+                }
+                catch(Exception ex) {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            Enabled();
+    }
+
+        private void btFix_Click(object sender, EventArgs e) {
+            int index = dgvArticle.CurrentRow.Index;
+            listPerson[index].Auther = cbName.Text;
+            listPerson[index].Date = dtpDate.Value;
+            listPerson[index].CarName = cbCarName.Text;
+            listPerson[index].Report = tbReport.Text;
+            listPerson[index].Picture = pbPicture.Image;
+            dgvArticle.Refresh();// データグリッドビューの更新
         }
     }
 }

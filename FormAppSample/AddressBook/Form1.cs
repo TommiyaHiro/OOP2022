@@ -90,7 +90,7 @@ namespace AddressBook {
 
         //private List<Person.KindNumberType> GetRadioButton() {
         //    var NumGroup = new List<Person.KindNumberType>();
-        //    if(radioButton1.) {
+        //    if(radioButton1.Checked) {
         //        NumGroup.Add(Person.KindNumberType.自宅);
         //    }
         //    if(radioButton2.Checked) {
@@ -184,14 +184,13 @@ namespace AddressBook {
 
                         using(FileStream fs = File.Open(sfdSaveDialog.FileName, FileMode.Create)) {
                             bf.Serialize(fs, listPerson);
-                        }
-                    }
-                    catch(Exception ex) {
-                        MessageBox.Show(ex.Message);
                     }
                 }
-
+                catch(Exception ex) {
+                    MessageBox.Show(ex.Message);
+                }
             }
+        }
         
         private void btOpen_Click(object sender, EventArgs e) {
             if(ofdFileOpenDialog.ShowDialog() == DialogResult.OK) {
