@@ -9,9 +9,12 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace CarReportSystem {
     public partial class Form1 : Form {
+        Settings settings = new Settings();
 
         BindingList<CarReport> listPerson = new BindingList<CarReport>();
 
@@ -50,7 +53,7 @@ namespace CarReportSystem {
             setCbAuther(cbName.Text);
 
             setCbCarName(cbCarName.Text);
-        
+
         }
 
         private void setCbCarName(string text) {
@@ -89,7 +92,6 @@ namespace CarReportSystem {
             else {
                 return CarReport.MakerGroup.その他;
             }
-            
         }
 
 
@@ -99,7 +101,6 @@ namespace CarReportSystem {
             if(listPerson.Count() == 0) {
                 Enabled();// マスク処理呼び出し
             }
-
         }
 
         private void Enabled() {
@@ -154,6 +155,33 @@ namespace CarReportSystem {
             listPerson[index].Report = tbReport.Text;
             listPerson[index].Picture = pbPicture.Image;
             dgvArticle.Refresh();// データグリッドビューの更新
+        }
+
+        private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
+            // 色設定ダイアログを表示
+            if(cdColorSelect.ShowDialog() == DialogResult.OK) {
+                BackColor = cdColorSelect.Color;
+
+                settings.MainFormColor = cdColorSelect.Color;
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e) {
+            //色設定逆シリアル化(P307)
+            using(var reader = XmlReader.Create("settings.xml")) {
+                var serializer = new XmlSerializer(typeof(Settings));
+                settings = serializer.Deserialize(reader) as Settings;
+            }
+
+            Enabled();
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
+            //シリアル化(P305)
+                        using(var writer = XmlWriter.Create("settings.xml")) {
+                var serializer = new XmlSerializer(settings.GetType());
+                serializer.Serialize(writer, settings);
+            }
         }
     }
 }
