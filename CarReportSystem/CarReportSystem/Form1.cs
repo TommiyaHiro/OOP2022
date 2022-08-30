@@ -14,7 +14,7 @@ using System.Xml.Serialization;
 
 namespace CarReportSystem {
     public partial class Form1 : Form {
-        Settings settings = new Settings();
+        Settings settings = Settings.getInstance();
 
         BindingList<CarReport> listPerson = new BindingList<CarReport>();
 
@@ -94,7 +94,6 @@ namespace CarReportSystem {
             }
         }
 
-
         private void btDelete_Click(object sender, EventArgs e) {
             listPerson.RemoveAt(dgvArticle.CurrentRow.Index);
 
@@ -162,15 +161,22 @@ namespace CarReportSystem {
             if(cdColorSelect.ShowDialog() == DialogResult.OK) {
                 BackColor = cdColorSelect.Color;
 
-                settings.MainFormColor = cdColorSelect.Color;
+                settings.MainFormColor = cdColorSelect.Color.ToArgb();
             }
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-            //色設定逆シリアル化(P307)
-            using(var reader = XmlReader.Create("settings.xml")) {
-                var serializer = new XmlSerializer(typeof(Settings));
-                settings = serializer.Deserialize(reader) as Settings;
+            try {
+                //色設定逆シリアル化(P307)
+                using(var reader = XmlReader.Create("settings.xml")) {
+                    var serializer = new XmlSerializer(typeof(Settings));
+                    settings = serializer.Deserialize(reader) as Settings;
+                    BackColor = Color.FromArgb(settings.MainFormColor);
+            }
+
+            }
+            catch(Exception) {
+
             }
 
             Enabled();
