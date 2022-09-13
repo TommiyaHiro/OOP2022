@@ -107,6 +107,10 @@ namespace AddressBook {
             this.addressTableTableAdapter.Fill(this.infosys202234DataSet.AddressTable);
         }
 
+        private void addressTableDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e) {
+
+        }
+
         private void バージョン情報ToolStripMenuItem_Click(object sender, EventArgs e) {
             new Version().ShowDialog();
         }

@@ -35,24 +35,36 @@ namespace CarReportSystem {
         }
 
         private void btAdd_Click(object sender, EventArgs e) {
-            if(String.IsNullOrWhiteSpace(cbName.Text)) {
-                MessageBox.Show("入力されていません");
-                return;
-            }
-            CarReport newPerson = new CarReport {
-                Date = dtpDate.Value,
-                Auther = cbName.Text,
-                CarName = cbCarName.Text,
-                Report = tbReport.Text,
-                Picture = pbPicture.Image,
-                Maker = GetCheckBoxGroup(),
-            };
-            listPerson.Add(newPerson);
-            dgvArticle.Rows[dgvArticle.RowCount - 1].Selected = true;
+            //if(String.IsNullOrWhiteSpace(cbName.Text)) {
+            //    MessageBox.Show("入力されていません");
+            //    return;
+            //}
+            //CarReport newPerson = new CarReport {
+            //    Date = dtpDate.Value,
+            //    Auther = cbName.Text,
+            //    CarName = cbCarName.Text,
+            //    Report = tbReport.Text,
+            //    Picture = pbPicture.Image,
+            //    Maker = GetCheckBoxGroup(),
+            //};
+            //listPerson.Add(newPerson);
+            //dgvArticle.Rows[dgvArticle.RowCount - 1].Selected = true;
 
-            setCbAuther(cbName.Text);
+            //setCbAuther(cbName.Text);
 
-            setCbCarName(cbCarName.Text);
+            //setCbCarName(cbCarName.Text);
+            DataRow newRow = infosys202234DataSet.CarReportDB.NewRow();
+            newRow[1] = dtpDate.Text;
+            newRow[2] = cbName.Text;
+            newRow[3] = GetCheckBoxGroup();
+            newRow[4] = cbCarName.Text; 
+            newRow[5] = tbReport.Text; 
+            newRow[6] = ImageToByteArray(pbPicture.Image); 
+
+            //データセットへ新しいレコードを追加
+            infosys202234DataSet.CarReportDB.Rows.Add(newRow);
+            //データベース更新
+            this.carReportDBTableAdapter.Update(this.infosys202234DataSet.CarReportDB);
 
         }
 
@@ -112,38 +124,58 @@ namespace CarReportSystem {
 
 
         private void btSave_Click(object sender, EventArgs e) {
-            if(sfdSaveDialog.ShowDialog() == DialogResult.OK) {
-                try {
-                    // バイナリ形式でシリアル化
-                    var bf = new BinaryFormatter();
+            //if(sfdSaveDialog.ShowDialog() == DialogResult.OK) {
+            //    try {
+            //        // バイナリ形式でシリアル化
+            //        var bf = new BinaryFormatter();
 
-                    using(FileStream fs = File.Open(sfdSaveDialog.FileName, FileMode.Create)) {
-                        bf.Serialize(fs, listPerson);
-                    }
-                }
-                catch(Exception ex) {
-                    MessageBox.Show(ex.Message);
-                }
-            }
+            //        using(FileStream fs = File.Open(sfdSaveDialog.FileName, FileMode.Create)) {
+            //            bf.Serialize(fs, listPerson);
+            //        }
+            //    }
+            //    catch(Exception ex) {
+            //        MessageBox.Show(ex.Message);
+            //    }
+            //}
+            carReportDBDataGridView.CurrentRow.Cells[1].Value = dtpDate.Text;
+            carReportDBDataGridView.CurrentRow.Cells[2].Value = cbName.Text;
+            carReportDBDataGridView.CurrentRow.Cells[3].Value = GetCheckBoxGroup();
+            carReportDBDataGridView.CurrentRow.Cells[4].Value = cbCarName.Text;
+            carReportDBDataGridView.CurrentRow.Cells[5].Value = tbReport.Text;
+            carReportDBDataGridView.CurrentRow.Cells[6].Value = ImageToByteArray(pbPicture.Image);
+
+        }
+
+        // バイト配列をImageオブジェクトに変換
+        public static Image ByteArrayToImage(byte[] b) {
+            ImageConverter imgconv = new ImageConverter();
+            Image img = (Image)imgconv.ConvertFrom(b);
+            return img;
+        }
+
+        public static byte[] ImageToByteArray(Image img) {
+            ImageConverter imgconv = new ImageConverter();
+            byte[] b = (byte[])imgconv.ConvertTo(img, typeof(byte[]));
+            return b;
         }
 
         private void btArticleOpen_Click(object sender, EventArgs e) {
-            if(openFileDialog1.ShowDialog() == DialogResult.OK) {
-                try {
-                    // バイナリ形式でシリアル化
-                    var bf = new BinaryFormatter();
-                    using(FileStream fs = File.Open(openFileDialog1.FileName, FileMode.Open, FileAccess.Read)) {
-                        // シリアル化して読み込む
-                        listPerson = (BindingList<CarReport>)bf.Deserialize(fs);
-                        dgvArticle.DataSource = null;
-                        dgvArticle.DataSource = listPerson;
-                    }
-                }
-                catch(Exception ex) {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-            Enabled();
+            //if(openFileDialog1.ShowDialog() == DialogResult.OK) {
+            //    try {
+            //        // バイナリ形式でシリアル化
+            //        var bf = new BinaryFormatter();
+            //        using(FileStream fs = File.Open(openFileDialog1.FileName, FileMode.Open, FileAccess.Read)) {
+            //            // シリアル化して読み込む
+            //            listPerson = (BindingList<CarReport>)bf.Deserialize(fs);
+            //            dgvArticle.DataSource = null;
+            //            dgvArticle.DataSource = listPerson;
+            //        }
+            //    }
+            //    catch(Exception ex) {
+            //        MessageBox.Show(ex.Message);
+            //    }
+            //}
+            //Enabled();
     }
 
         private void btFix_Click(object sender, EventArgs e) {
@@ -189,5 +221,26 @@ namespace CarReportSystem {
                 serializer.Serialize(writer, settings);
             }
         }
+
+        private void carReportDBBindingNavigatorSaveItem_Click(object sender, EventArgs e) {
+            this.Validate();
+            this.carReportDBBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.infosys202234DataSet);
+
+        }
+
+        private void carReportDBBindingNavigatorSaveItem_Click_1(object sender, EventArgs e) {
+            this.Validate();
+            this.carReportDBBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.infosys202234DataSet);
+
+        }
+
+        private void button1_Click(object sender, EventArgs e) {
+            // TODO: このコード行はデータを 'infosys202234DataSet.CarReportDB' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
+            this.carReportDBTableAdapter.Fill(this.infosys202234DataSet.CarReportDB);
+
+        }
+
     }
 }
