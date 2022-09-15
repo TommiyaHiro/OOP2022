@@ -16,11 +16,8 @@ namespace CarReportSystem {
     public partial class Form1 : Form {
         Settings settings = Settings.getInstance();
 
-        BindingList<CarReport> listPerson = new BindingList<CarReport>();
-
         public Form1() {
             InitializeComponent();
-            dgvArticle.DataSource = listPerson;
         }
 
         private void btPictureOpen_Click(object sender, EventArgs e) {
@@ -35,24 +32,6 @@ namespace CarReportSystem {
         }
 
         private void btAdd_Click(object sender, EventArgs e) {
-            //if(String.IsNullOrWhiteSpace(cbName.Text)) {
-            //    MessageBox.Show("入力されていません");
-            //    return;
-            //}
-            //CarReport newPerson = new CarReport {
-            //    Date = dtpDate.Value,
-            //    Auther = cbName.Text,
-            //    CarName = cbCarName.Text,
-            //    Report = tbReport.Text,
-            //    Picture = pbPicture.Image,
-            //    Maker = GetCheckBoxGroup(),
-            //};
-            //listPerson.Add(newPerson);
-            //dgvArticle.Rows[dgvArticle.RowCount - 1].Selected = true;
-
-            //setCbAuther(cbName.Text);
-
-            //setCbCarName(cbCarName.Text);
             DataRow newRow = infosys202234DataSet.CarReportDB.NewRow();
             newRow[1] = dtpDate.Text;
             newRow[2] = cbName.Text;
@@ -85,37 +64,31 @@ namespace CarReportSystem {
         }
 
         // チェックボックスにセットされている値をリストとしてとりだす
-        private CarReport.MakerGroup GetCheckBoxGroup() {
+        private string GetCheckBoxGroup() {
             if(rbTOYOTA.Checked) {
-                return CarReport.MakerGroup.トヨタ;
+                return "トヨタ";
             }
             if(rbNISSAN.Checked) {
-                return CarReport.MakerGroup.日産;
+                return "日産";
             }
             if(rbHONDA.Checked) {
-                return CarReport.MakerGroup.ホンダ;
+                return "ホンダ";
             }
             if(rbSUBARU.Checked) {
-                return CarReport.MakerGroup.スバル;
+                return "スバル";
             }
             if(rbForeignCar.Checked) {
-                return CarReport.MakerGroup.外国車;
+                return "外国車";
             }
             else {
-                return CarReport.MakerGroup.その他;
+                return "その他";
             }
         }
 
         private void btDelete_Click(object sender, EventArgs e) {
-            listPerson.RemoveAt(dgvArticle.CurrentRow.Index);
+            carReportDBBindingSource.RemoveAt(carReportDBDataGridView.CurrentRow.Index);
+            this.carReportDBTableAdapter.Update(this.infosys202234DataSet.CarReportDB);
 
-            if(listPerson.Count() == 0) {
-                Enabled();// マスク処理呼び出し
-            }
-        }
-
-        private void Enabled() {
-            btFix.Enabled = btDelete.Enabled = listPerson.Count() > 0 ? true : false;
         }
 
         private void btPictureDelete_Click(object sender, EventArgs e) {
@@ -124,19 +97,6 @@ namespace CarReportSystem {
 
 
         private void btSave_Click(object sender, EventArgs e) {
-            //if(sfdSaveDialog.ShowDialog() == DialogResult.OK) {
-            //    try {
-            //        // バイナリ形式でシリアル化
-            //        var bf = new BinaryFormatter();
-
-            //        using(FileStream fs = File.Open(sfdSaveDialog.FileName, FileMode.Create)) {
-            //            bf.Serialize(fs, listPerson);
-            //        }
-            //    }
-            //    catch(Exception ex) {
-            //        MessageBox.Show(ex.Message);
-            //    }
-            //}
             carReportDBDataGridView.CurrentRow.Cells[1].Value = dtpDate.Text;
             carReportDBDataGridView.CurrentRow.Cells[2].Value = cbName.Text;
             carReportDBDataGridView.CurrentRow.Cells[3].Value = GetCheckBoxGroup();
@@ -157,35 +117,6 @@ namespace CarReportSystem {
             ImageConverter imgconv = new ImageConverter();
             byte[] b = (byte[])imgconv.ConvertTo(img, typeof(byte[]));
             return b;
-        }
-
-        private void btArticleOpen_Click(object sender, EventArgs e) {
-            //if(openFileDialog1.ShowDialog() == DialogResult.OK) {
-            //    try {
-            //        // バイナリ形式でシリアル化
-            //        var bf = new BinaryFormatter();
-            //        using(FileStream fs = File.Open(openFileDialog1.FileName, FileMode.Open, FileAccess.Read)) {
-            //            // シリアル化して読み込む
-            //            listPerson = (BindingList<CarReport>)bf.Deserialize(fs);
-            //            dgvArticle.DataSource = null;
-            //            dgvArticle.DataSource = listPerson;
-            //        }
-            //    }
-            //    catch(Exception ex) {
-            //        MessageBox.Show(ex.Message);
-            //    }
-            //}
-            //Enabled();
-    }
-
-        private void btFix_Click(object sender, EventArgs e) {
-            int index = dgvArticle.CurrentRow.Index;
-            listPerson[index].Auther = cbName.Text;
-            listPerson[index].Date = dtpDate.Value;
-            listPerson[index].CarName = cbCarName.Text;
-            listPerson[index].Report = tbReport.Text;
-            listPerson[index].Picture = pbPicture.Image;
-            dgvArticle.Refresh();// データグリッドビューの更新
         }
 
         private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -209,9 +140,10 @@ namespace CarReportSystem {
             }
             catch(Exception) {
 
+
             }
 
-            Enabled();
+            //Enabled();
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
@@ -242,5 +174,52 @@ namespace CarReportSystem {
 
         }
 
+        private void DataGridView_Click(object sender, EventArgs e) {
+
+            if(carReportDBDataGridView.CurrentRow == null) {
+                return;
+            }
+
+            dtpDate.Text = carReportDBDataGridView.CurrentRow.Cells[1].Value.ToString();
+            cbName.Text = carReportDBDataGridView.CurrentRow.Cells[2].Value.ToString();
+            setMakerRadioSet(carReportDBDataGridView.CurrentRow.Cells[3].Value.ToString());
+            cbCarName.Text = carReportDBDataGridView.CurrentRow.Cells[4].Value.ToString();
+            tbReport.Text = carReportDBDataGridView.CurrentRow.Cells[5].Value.ToString();
+            if(!(carReportDBDataGridView.CurrentRow.Cells[6].Value is DBNull))
+                pbPicture.Image = ByteArrayToImage((byte[])carReportDBDataGridView.CurrentRow.Cells[6].Value);
+            else
+                pbPicture.Image = null;
+
+        }
+
+        private void setMakerRadioSet(string maker) {
+            switch(maker) {
+                case"トヨタ":
+                    rbTOYOTA.Checked = true;
+                    break;
+                case"日産":
+                    rbNISSAN.Checked = true;
+                    break;
+                case"ホンダ":
+                    rbHONDA.Checked = true;
+                    break;
+                case"スバル":
+                    rbSUBARU.Checked = true;
+                    break;
+                case"外国車":
+                    rbForeignCar.Checked = true;
+                    break;
+                case"その他":
+                    rbOther.Checked = true;
+                    break;
+                default:
+                    break;
+
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e) {
+            carReportDBTableAdapter.FillBy(infosys202234DataSet.CarReportDB, tbSearchName.Text);
+        }
     }
 }

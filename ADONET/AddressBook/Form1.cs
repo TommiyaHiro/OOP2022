@@ -81,6 +81,7 @@ namespace AddressBook {
             return img;
         }
 
+
         // Imageオブジェクトをバイト配列に変換
         public static byte[] ImageToByteArray(Image img) {
             ImageConverter imgconv = new ImageConverter();
@@ -114,5 +115,7 @@ namespace AddressBook {
         private void バージョン情報ToolStripMenuItem_Click(object sender, EventArgs e) {
             new Version().ShowDialog();
         }
+
+
     }
 }
