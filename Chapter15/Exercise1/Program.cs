@@ -25,6 +25,11 @@ namespace Exercise1 {
         }
 
         private static void Exercise1_2() {
+            var max = Library.Books
+                .Max(b => b.Price);
+            var book = Library.Books
+                .First(b => b.Price == max);
+            Console.WriteLine(book);
         }
 
         private static void Exercise1_3() {
