@@ -10,7 +10,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
 
+        </Grid.ColumnDefinitions>
     </Grid>
 </Window>
