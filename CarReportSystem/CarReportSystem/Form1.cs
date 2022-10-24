@@ -104,6 +104,8 @@ namespace CarReportSystem {
             carReportDBDataGridView.CurrentRow.Cells[5].Value = tbReport.Text;
             carReportDBDataGridView.CurrentRow.Cells[6].Value = ImageToByteArray(pbPicture.Image);
 
+            //データベース更新
+            this.carReportDBTableAdapter.Update(this.infosys202234DataSet.CarReportDB);
         }
 
         // バイト配列をImageオブジェクトに変換
@@ -171,7 +173,6 @@ namespace CarReportSystem {
         private void button1_Click(object sender, EventArgs e) {
             // TODO: このコード行はデータを 'infosys202234DataSet.CarReportDB' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
             this.carReportDBTableAdapter.Fill(this.infosys202234DataSet.CarReportDB);
-
         }
 
         private void DataGridView_Click(object sender, EventArgs e) {
