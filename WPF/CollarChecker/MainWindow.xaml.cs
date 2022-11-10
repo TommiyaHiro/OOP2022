@@ -18,6 +18,8 @@ namespace CollarChecker {
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック
     /// </summary>
+    /// 
+
     public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();
@@ -61,7 +63,7 @@ namespace CollarChecker {
         }
 
         private void stockButton_Click(object sender, RoutedEventArgs e) {
-
+            
         }
     }
 
