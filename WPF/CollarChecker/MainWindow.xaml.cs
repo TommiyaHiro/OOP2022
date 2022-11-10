@@ -82,7 +82,12 @@ namespace CollarChecker {
         }
 
         private void deleteButton_Click(object sender, RoutedEventArgs e) {
-            colorList.RemoveAt(stockList.SelectedIndex);
+            var delIndex = stockList.SelectedIndex;
+            if(delIndex == -1)
+                return;
+
+            stockList.Items.RemoveAt(delIndex);
+            colorList.RemoveAt(delIndex);
 
 
         }
