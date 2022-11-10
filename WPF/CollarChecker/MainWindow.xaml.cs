@@ -21,6 +21,9 @@ namespace CollarChecker {
     /// 
 
     public partial class MainWindow : Window {
+
+        List<MyColor> colorList = new List<MyColor>();
+
         public MainWindow() {
             InitializeComponent();
 
@@ -63,9 +66,29 @@ namespace CollarChecker {
         }
 
         private void stockButton_Click(object sender, RoutedEventArgs e) {
-            
+            MyColor stColor = new MyColor();
+            var r = byte.Parse(rValue.Text);
+            var g = byte.Parse(gValue.Text);
+            var b = byte.Parse(bValue.Text);
+            stColor.Color = Color.FromRgb(r, g, b);
+
+            var colorName = ((IEnumerable<MyColor>)DataContext)
+                .Where(c => c.Color.R == stColor.Color.R &&
+                            c.Color.G == stColor.Color.G &&
+                            c.Color.B == stColor.Color.B).FirstOrDefault();
+
+            stockList.Items.Insert(0, colorName?.Name ?? "R:" + "G:" + gValue.Text + "B:" + bValue.Text);
+            colorList.Insert(0, stColor);
         }
+
+        private void deleteButton_Click(object sender, RoutedEventArgs e) {
+            colorList.RemoveAt(stockList.SelectedIndex);
+
+
+        }
+
     }
+
 
     /// <summary>
     /// 色と色名を保持するクラス
