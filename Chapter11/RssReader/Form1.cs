@@ -54,6 +54,10 @@ namespace RssReader {
             btForward.Enabled = wvBrowser.CanGoForward;
         }
 
+        private void lbRssTitle_SelectedIndexChanged(object sender, EventArgs e) {
+
+        }
+
         private void lbRssTitle_Click(object sender, EventArgs e) {
             int index = lbRssTitle.SelectedIndex; // 選択した箇所のインデックスを取得
             if(index == -1) return;
