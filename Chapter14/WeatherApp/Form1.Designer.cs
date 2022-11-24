@@ -25,19 +25,11 @@ namespace WeatherApp {
         /// コード エディターで変更しないでください。
         /// </summary>
         private void InitializeComponent() {
-            this.tbWeatherInfo = new System.Windows.Forms.TextBox();
             this.btWeatherGet = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbareaSelect = new System.Windows.Forms.ComboBox();
+            this.tbweather = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
-            // tbWeatherInfo
-            // 
-            this.tbWeatherInfo.Location = new System.Drawing.Point(128, 195);
-            this.tbWeatherInfo.Multiline = true;
-            this.tbWeatherInfo.Name = "tbWeatherInfo";
-            this.tbWeatherInfo.Size = new System.Drawing.Size(511, 154);
-            this.tbWeatherInfo.TabIndex = 0;
             // 
             // btWeatherGet
             // 
@@ -53,33 +45,84 @@ namespace WeatherApp {
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(16, 195);
+            this.label1.Location = new System.Drawing.Point(16, 243);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(106, 24);
             this.label1.TabIndex = 2;
             this.label1.Text = "天気概況";
             // 
-            // comboBox1
+            // cbareaSelect
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "群馬県",
-            "東京都"});
-            this.comboBox1.Location = new System.Drawing.Point(128, 44);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(92, 20);
-            this.comboBox1.TabIndex = 3;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.cbareaSelect.FormattingEnabled = true;
+            this.cbareaSelect.Items.AddRange(new object[] {
+            "青森",
+            "岩手",
+            "宮城",
+            "秋田",
+            "山形",
+            "福島",
+            "茨木",
+            "栃木",
+            "群馬",
+            "埼玉",
+            "千葉",
+            "東京",
+            "神奈川",
+            "山梨",
+            "長野",
+            "岐阜",
+            "静岡",
+            "愛知",
+            "三重",
+            "新潟",
+            "富山",
+            "石川",
+            "福井",
+            "滋賀",
+            "京都",
+            "大阪",
+            "兵庫",
+            "奈良",
+            "和歌山",
+            "鳥取",
+            "島根",
+            "岡山",
+            "広島",
+            "徳島",
+            "香川",
+            "愛媛",
+            "高知",
+            "山口",
+            "福岡",
+            "佐賀",
+            "長崎",
+            "熊本",
+            "大分",
+            "宮崎"});
+            this.cbareaSelect.Location = new System.Drawing.Point(128, 44);
+            this.cbareaSelect.Name = "cbareaSelect";
+            this.cbareaSelect.Size = new System.Drawing.Size(92, 20);
+            this.cbareaSelect.TabIndex = 3;
+            this.cbareaSelect.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // tbweather
+            // 
+            this.tbweather.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.tbweather.Location = new System.Drawing.Point(141, 243);
+            this.tbweather.Multiline = true;
+            this.tbweather.Name = "tbweather";
+            this.tbweather.Size = new System.Drawing.Size(206, 33);
+            this.tbweather.TabIndex = 6;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(666, 387);
-            this.Controls.Add(this.comboBox1);
+            this.ClientSize = new System.Drawing.Size(660, 381);
+            this.Controls.Add(this.tbweather);
+            this.Controls.Add(this.cbareaSelect);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btWeatherGet);
-            this.Controls.Add(this.tbWeatherInfo);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -88,11 +131,10 @@ namespace WeatherApp {
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox tbWeatherInfo;
         private System.Windows.Forms.Button btWeatherGet;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbareaSelect;
+        private System.Windows.Forms.TextBox tbweather;
     }
 }
 
