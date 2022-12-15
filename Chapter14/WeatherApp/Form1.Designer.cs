@@ -45,7 +45,7 @@ namespace WeatherApp {
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(16, 243);
+            this.label1.Location = new System.Drawing.Point(16, 97);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(106, 24);
             this.label1.TabIndex = 2;
@@ -55,6 +55,7 @@ namespace WeatherApp {
             // 
             this.cbareaSelect.FormattingEnabled = true;
             this.cbareaSelect.Items.AddRange(new object[] {
+            "北海道 宇谷地方",
             "青森",
             "岩手",
             "宮城",
@@ -98,7 +99,9 @@ namespace WeatherApp {
             "長崎",
             "熊本",
             "大分",
-            "宮崎"});
+            "宮崎",
+            "鹿児島",
+            "沖縄"});
             this.cbareaSelect.Location = new System.Drawing.Point(128, 44);
             this.cbareaSelect.Name = "cbareaSelect";
             this.cbareaSelect.Size = new System.Drawing.Size(92, 20);
@@ -108,17 +111,17 @@ namespace WeatherApp {
             // tbweather
             // 
             this.tbweather.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tbweather.Location = new System.Drawing.Point(141, 243);
+            this.tbweather.Location = new System.Drawing.Point(128, 97);
             this.tbweather.Multiline = true;
             this.tbweather.Name = "tbweather";
-            this.tbweather.Size = new System.Drawing.Size(206, 33);
+            this.tbweather.Size = new System.Drawing.Size(240, 73);
             this.tbweather.TabIndex = 6;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(660, 381);
+            this.ClientSize = new System.Drawing.Size(397, 200);
             this.Controls.Add(this.tbweather);
             this.Controls.Add(this.cbareaSelect);
             this.Controls.Add(this.label1);

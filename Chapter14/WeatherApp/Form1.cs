@@ -14,6 +14,7 @@ namespace WeatherApp {
     public partial class Form1 : Form {
 
         string[] areaCodes = {
+                        "011000",    //北海道　宇谷地方
                         "020000",    //青森
                         "030000",    //岩手
                         "040000",    //宮城
@@ -58,6 +59,9 @@ namespace WeatherApp {
                         "430000",   //熊本
                         "440000",   //大分
                         "450000",   //宮崎
+                        "460100",   //鹿児島
+                        "471000",   //沖縄
+
         };
         string[] weathermark = {
                         "100",
